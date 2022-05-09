@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap");
+
+.div_articles {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.div_article_card {
+  display: flex;
+  flex-flow: column wrap;
+  width: 775px;
+  margin-bottom: 25px;
+  font-family: "Inria Sans", sans-serif;
+}
+.div_article_card_text {
+  height: auto;
+  margin-top: 15px;
+  font-size: medium;
+  border: 0.1px solid white;
+  padding: 15px 15px 15px 15px ;
+}
+.div_article_card_title {
+  margin-bottom: 0;
+}
+.div_article_card_img {
+  border: 0.1px solid white;
+}

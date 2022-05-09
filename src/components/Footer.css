@@ -1,0 +1,8 @@
+.div_footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    gap: 30px;
+    padding: 15px 15px 15px 15px;
+}

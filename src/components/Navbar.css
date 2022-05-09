@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Iceland&family=JetBrains+Mono:wght@100&display=swap");
+.div_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.div_header_logo {
+  font-family: "JetBrains Mono";
+  font-size: 17.5px;
+  line-height: 66px;
+  letter-spacing: 20px;
+}
+.div_header_nav {
+  font-family: "Iceland";
+  font-size: 20px;
+  font-style: normal;
+}
