@@ -12,6 +12,10 @@ export default function Navbar() {
       </div>
       <div className="div_header_nav">
         <p>Profile</p>
+        <Link to="/add_article">
+          <p>Write New Article</p>
+        </Link>
+        <p>About Project</p>
       </div>
     </div>
   );

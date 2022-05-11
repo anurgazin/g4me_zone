@@ -5,6 +5,7 @@ import Articles from "./components/Articles";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import AddArticle from "./components/AddArticle";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Articles />}></Route>
           <Route exact path="/article/:id" element={<Article />}></Route>
+          <Route exact path="/add_article" element={<AddArticle />}></Route>
         </Routes>
         <Footer />
       </Router>

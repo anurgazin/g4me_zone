@@ -1,0 +1,12 @@
+.div_card {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.div_article_card {
+  display: flex;
+  flex-flow: column wrap;
+  width: 775px;
+  margin-bottom: 25px;
+  font-family: "Inria Sans", sans-serif;
+}
