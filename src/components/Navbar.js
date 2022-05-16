@@ -7,7 +7,7 @@ export default function Navbar() {
     <div className="div_header">
       <div className="div_header_logo">
         <Link to="/">
-          <ReactTypingEffect className="div_header_logo" text={"G4ME_ZONE"}></ReactTypingEffect>
+          <ReactTypingEffect className="div_header_logo" text={"G4ME_Z0NE"}></ReactTypingEffect>
         </Link>
       </div>
       <div className="div_header_nav">
