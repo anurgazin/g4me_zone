@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../api/index";
+import apis from "../api/index";
 import { useParams } from "react-router-dom";
 //import { articles } from "../pseudo_data";
 import "./Article.css";
@@ -15,7 +15,7 @@ export default function Article() {
     }
   });
   const getArticle = async () => {
-    await api.getArticleById(id).then((item) => {
+    await apis.getArticleById(id).then((item) => {
       setArticle(item.data.data);
     });
   };
