@@ -37,6 +37,11 @@ export default function AddArticle() {
     payload.append("articleImage", image);
     await apis.createArticle(payload).then((res) => {
       window.alert(`Article is added successfully`);
+      setText("");
+      setImage("")
+      setPhoto("");
+      setTitle("");
+      setRating("")
     });
   };
   return (
@@ -50,6 +55,7 @@ export default function AddArticle() {
             type="text"
             onChange={handleChangeInputName}
             id="title"
+            value={title}
             name="title"
           ></input>
         </div>
@@ -62,6 +68,7 @@ export default function AddArticle() {
             min="0"
             max="5"
             onChange={handleChangeInputRating}
+            value={rating}
             id="rating"
             name="rating"
           ></input>
@@ -81,6 +88,7 @@ export default function AddArticle() {
             style={{ width: "750px", height: "250px" }}
             id="text_review"
             name="text_review"
+            value={text}
             onChange={handleChangeInputText}
           ></textarea>
         </div>

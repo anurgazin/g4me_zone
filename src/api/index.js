@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://g4me-zone-api.herokuapp.com/api",
 });
 
 export const createArticle = (payload) => api.post(`/article`, payload);

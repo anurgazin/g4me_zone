@@ -2,7 +2,7 @@
 
 .div_articles {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column-reverse wrap;
   align-content: center;
 }
 .div_article_card {
