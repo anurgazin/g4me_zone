@@ -18,10 +18,7 @@ export default function AddArticle() {
   };
   const handleChangeInputImg = async (event) => {
     console.log(event.target.files[0]);
-    const formData = new FormData();
-    formData.append('image', event.target.files[0]);
-    setImage(formData);
-    console.log(image);
+    setImage(event.target.files[0]);
   };
   const handleChangeInputName = async (event) => {
     setTitle(event.target.value);
@@ -33,10 +30,13 @@ export default function AddArticle() {
     setText(event.target.value);
   };
   const handleInsertArticle = async () => {
-    const payload = { title, text, rating, image };
-    console.log(photo);
+    const payload = new FormData();
+    payload.append("title", title);
+    payload.append("text", text);
+    payload.append("rating", rating);
+    payload.append("articleImage", image);
     await apis.createArticle(payload).then((res) => {
-      window.alert(`Movie inserted successfully`);
+      window.alert(`Article is added successfully`);
     });
   };
   return (
