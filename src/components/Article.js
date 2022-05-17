@@ -33,7 +33,7 @@ export default function Article() {
           <img
             width="775px"
             height="auto"
-            src={article.image}
+            src={"http://localhost:8080/"+article.image}
             alt={article.title}
           ></img>
         </div>
