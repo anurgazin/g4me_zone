@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 //import { articles } from "../pseudo_data";
-import api from "../api/index";
+import apis from "../api/index";
 import { Link } from "react-router-dom";
 import "./Articles.css";
 
@@ -12,7 +12,7 @@ export default function Articles() {
     }
   });
   const gettingArticles = async () => {
-    await api.getAllArticles().then((items) => {
+    await apis.getAllArticles().then((items) => {
       setTestArticles(items.data.data);
     });
   };
@@ -33,7 +33,7 @@ export default function Articles() {
               <img
                 width="775px"
                 height="auto"
-                src={"https://g4me-zone-api.herokuapp.com/"+article.image}
+                src={"https://g4me-zone-api.herokuapp.com/" + article.image}
                 alt={article.title}
               ></img>
             </div>
