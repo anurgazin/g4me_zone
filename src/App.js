@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AddArticle from "./components/AddArticle";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route exact path="/" element={<Articles />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/registration" element={<Register />}></Route>
           <Route exact path="/article/:id" element={<Article />}></Route>
           <Route exact path="/add_article" element={<AddArticle />}></Route>
         </Routes>

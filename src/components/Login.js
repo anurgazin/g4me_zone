@@ -1,0 +1,76 @@
+import React, { useState } from "react";
+import apis from "../api";
+import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+
+  const handleLoginInto = async () => {
+    await apis
+      .loginAccount({ email, password })
+      .then((account) => {
+        if (account.data.token) {
+          console.log(account.data.token);
+          var decoded = jwt_decode(account.data.token);
+          //console.log(decoded.user);
+          setUser(decoded.user);
+          console.log(user);
+          window.alert("Successfully Signed In");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        window.alert("Wrong Input");
+      });
+  };
+
+  const handleChangeInputEmail = async (event) => {
+    setEmail(event.target.value);
+  };
+  const handleChangeInputPassword = async (event) => {
+    setPassword(event.target.value);
+  };
+
+  return (
+    <div className="div_login_form">
+      <div className="div_login_form_inner">
+        <h2>Login Form</h2>
+        <div className="div_login_form_email">
+          <label htmlFor="email">Enter Email</label>
+          <br />
+          <input
+            type="text"
+            onChange={handleChangeInputEmail}
+            id="email"
+            value={email}
+            name="email"
+          ></input>
+        </div>
+        <div className="div_login_form_password">
+          <label htmlFor="password">Enter Password</label>
+          <br />
+          <input
+            type="password"
+            onChange={handleChangeInputPassword}
+            id="password"
+            value={password}
+            name="password"
+          ></input>
+        </div>
+        <div className="div_login_form_buttons">
+          <div className="div_login_form_buttons_sign_in">
+            <button onClick={handleLoginInto}>Sign In</button>
+          </div>
+          <div className="div_login_form_buttons_sign_up">
+            <Link to="/registration">
+              <p>Don't have an account? Register today</p>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
