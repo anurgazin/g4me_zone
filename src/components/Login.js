@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import apis from "../api";
 import jwt_decode from "jwt-decode";
+import "./Login.css";
 import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 
@@ -51,6 +52,7 @@ export default function Login() {
           <div className="div_login_form_email">
             <label htmlFor="email">Enter Email</label>
             <br />
+            <br />
             <input
               type="text"
               onChange={handleChangeInputEmail}
@@ -61,6 +63,7 @@ export default function Login() {
           </div>
           <div className="div_login_form_password">
             <label htmlFor="password">Enter Password</label>
+            <br />
             <br />
             <input
               type="password"
@@ -76,7 +79,10 @@ export default function Login() {
             </div>
             <div className="div_login_form_buttons_sign_up">
               <Link to="/registration">
-                <p>Don't have an account? Register today</p>
+                <p>
+                  Don't have an account?
+                  <br /> Register today
+                </p>
               </Link>
             </div>
           </div>
@@ -85,9 +91,11 @@ export default function Login() {
     );
   } else {
     return (
-      <div className="div_login_form_buttons_sign_out">
-        <h2>You are already signed in</h2>
-        <button onClick={signOut}>Sign Out</button>
+      <div className="div_login_form">
+        <div className="div_login_form_buttons_sign_out">
+          <h2>You are already signed in</h2>
+          <button onClick={signOut}>Sign Out</button>
+        </div>
       </div>
     );
   }

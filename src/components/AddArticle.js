@@ -10,17 +10,6 @@ export default function AddArticle() {
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
 
-  // function isNotAuthorized(props) {
-  //   return
-  // }
-
-  // function canWrite(props) {
-  //   console.log(ReactSession.get("email"));
-  //   if (ReactSession.get("isAdmin")) {
-  //     return <isAuthorized />;
-  //   }
-  //   return <isNotAuthorized />;
-  // }
   async function handleChange(event) {
     handleChangeInputPhoto(event);
     handleChangeInputImg(event);
@@ -56,7 +45,7 @@ export default function AddArticle() {
       setRating("");
     });
   };
-  if (ReactSession.get("isAdmin")) {
+  if (ReactSession.get("isAdmin") && ReactSession.get("email")) {
     console.log(ReactSession.get("email"));
     return (
       <div className="div_add_article">
@@ -112,7 +101,17 @@ export default function AddArticle() {
         </div>
       </div>
     );
+  } else if (ReactSession.get("email")) {
+    return (
+      <div className="div_add_article">
+        <h2>You Have no Permission to Write an Article</h2>
+      </div>
+    );
   } else {
-    return <h2>Is not Authorized</h2>;
+    return (
+      <div className="div_add_article">
+        <h2>You are not Authorized</h2>
+      </div>
+    );
   }
 }
