@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apis from "../api/index";
+//import Comments from "./Comments";
 import { useParams } from "react-router-dom";
 //import { articles } from "../pseudo_data";
 import "./Article.css";
@@ -33,7 +34,7 @@ export default function Article() {
           <img
             width="775px"
             height="auto"
-            src={"https://g4me-zone-api.herokuapp.com/"+article.image}
+            src={"https://g4me-zone-api.herokuapp.com/" + article.image}
             alt={article.title}
           ></img>
         </div>
@@ -41,6 +42,7 @@ export default function Article() {
           <p>{article.text}</p>
         </div>
       </div>
+      {/* <Comments></Comments> */}
     </div>
   );
 }

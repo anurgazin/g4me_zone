@@ -8,6 +8,8 @@ import "./App.css";
 import AddArticle from "./components/AddArticle";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AddComment from "./components/AddComment";
+import Comments from "./components/Comments";
 
 function App() {
   return (
@@ -18,7 +20,11 @@ function App() {
           <Route exact path="/" element={<Articles />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/registration" element={<Register />}></Route>
-          <Route exact path="/article/:id" element={<Article />}></Route>
+          <Route
+            exact
+            path="/article/:id"
+            element={[<Article />, <AddComment />, <Comments />]}
+          ></Route>
           <Route exact path="/add_article" element={<AddArticle />}></Route>
         </Routes>
         <Footer />
