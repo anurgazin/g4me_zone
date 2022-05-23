@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apis from "../api";
+import "./Comments.css";
 //import { ReactSession } from "react-client-session";
 
 export default function Comments() {
@@ -16,14 +17,14 @@ export default function Comments() {
   }, [pre_comments, id]);
 
   const comments = Array.from(pre_comments);
-  console.log(comments);
+  //console.log(comments);
   if (comments.length >= 1) {
     return (
       <div className="div_comments">
         {comments.map((comment) => (
           <div key={comment._id} className="div_comment_card">
             <div className="div_comment_card_author">
-              <p>{comment.author}</p>
+              <p>{comment.author} :</p>
             </div>
             <div className="div_comment_card_text">
               <p>{comment.text}</p>

@@ -1,0 +1,21 @@
+.div_add_comment {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.div_add_comment_inner {
+  padding: 15px 15px 15px 15px;
+  width: 745px;
+  border: 0.1px solid white;
+  display: flex;
+  flex-flow: column wrap;
+  /* align-content: stretch; */
+  margin-bottom: 25px;
+  font-family: "Inria Sans", sans-serif;
+}
+.div_add_comment_btn {
+  margin-top: 15px;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}

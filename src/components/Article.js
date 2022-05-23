@@ -20,7 +20,6 @@ export default function Article() {
       setArticle(item.data.data);
     });
   };
-  console.log(article);
   return (
     <div className="div_card">
       <div className="div_article_card">
