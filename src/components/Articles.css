@@ -1,9 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap');
 .div_articles {
   display: flex;
+  min-height: 75vh;
   flex-flow: column-reverse wrap;
   align-content: center;
+  justify-content: center;
+}
+.div_articles_loading{
+  font-family: 'Teko', sans-serif;
+  font-size: 30px;
+  letter-spacing: 7px;
 }
 .div_article_card {
   display: flex;
@@ -21,6 +28,9 @@
 }
 .div_article_card_title {
   margin-bottom: 0;
+}
+.div_article_card_rating {
+  margin-top: 0;
 }
 .div_article_card_img {
   border: 0.1px solid white;

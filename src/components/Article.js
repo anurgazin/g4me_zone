@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 //import { articles } from "../pseudo_data";
 import "./Article.css";
 
-console.log("I AM HERE");
 export default function Article() {
   let { id } = useParams();
   //let fid = 1;
