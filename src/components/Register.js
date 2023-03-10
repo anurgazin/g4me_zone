@@ -16,7 +16,6 @@ export default function Register() {
         ReactSession.set("email", result.data.data.email);
         ReactSession.set("isAdmin", result.data.data.isAdmin);
         setUser(result.data.data);
-        console.log(ReactSession.get("email"));
       })
       .catch((error) => {
         console.log(error.response.status);

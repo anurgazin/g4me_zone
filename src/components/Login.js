@@ -15,11 +15,8 @@ export default function Login() {
       .loginAccount({ email, password })
       .then((account) => {
         if (account.data.token) {
-          console.log(account.data.token);
           var decoded = jwt_decode(account.data.token);
-          //console.log(decoded.user);
           if (decoded.user) {
-            console.log(decoded.user);
             ReactSession.set("email", decoded.user.email);
             ReactSession.set("isAdmin", decoded.user.isAdmin);
             setUser(decoded.user);

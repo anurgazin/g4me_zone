@@ -32,7 +32,7 @@ export default function Article() {
           <img
             width="775px"
             height="auto"
-            src={"https://g4me-zone-api.herokuapp.com/" + article.image}
+            src={article.image}
             alt={article.title}
           ></img>
         </div>
