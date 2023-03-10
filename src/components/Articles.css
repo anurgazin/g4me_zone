@@ -3,7 +3,7 @@
 .div_articles {
   display: flex;
   min-height: 75vh;
-  flex-flow: column-reverse wrap;
+  flex-flow: column wrap;
   align-content: center;
   justify-content: center;
 }

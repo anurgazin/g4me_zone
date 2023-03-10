@@ -4,11 +4,16 @@ import { ReactSession } from "react-client-session";
 import "./AddArticle.css";
 
 export default function AddArticle() {
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  var date = curr.toISOString().substring(0, 10);
   const [photo, setPhoto] = useState(0);
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
+  const [release, setDate] = useState(date);
+  const [genre, setGenre] = useState("");
 
   async function handleChange(event) {
     handleChangeInputPhoto(event);
@@ -20,6 +25,14 @@ export default function AddArticle() {
   const handleChangeInputImg = async (event) => {
     console.log(event.target.files[0]);
     setImage(event.target.files[0]);
+  };
+  const handleChangeInputGenre = async (event) => {
+    console.log(event.target.value);
+    setGenre(event.target.value);
+  };
+  const handleChangeInputDate = async (event) => {
+    console.log(event.target.value);
+    setDate(event.target.value);
   };
   const handleChangeInputName = async (event) => {
     setTitle(event.target.value);
@@ -35,6 +48,8 @@ export default function AddArticle() {
     payload.append("title", title);
     payload.append("text", text);
     payload.append("rating", rating);
+    payload.append("release", release);
+    payload.append("genre", genre);
     payload.append("articleImage", image);
     await apis.createArticle(payload).then((res) => {
       window.alert(`Article is added successfully`);
@@ -43,6 +58,8 @@ export default function AddArticle() {
       setPhoto("");
       setTitle("");
       setRating("");
+      setDate(date);
+      setGenre("");
     });
   };
   if (ReactSession.get("isAdmin") && ReactSession.get("email")) {
@@ -60,6 +77,7 @@ export default function AddArticle() {
               id="title"
               value={title}
               name="title"
+              required
             ></input>
           </div>
           <div className="div_add_article_rating">
@@ -74,6 +92,31 @@ export default function AddArticle() {
               value={rating}
               id="rating"
               name="rating"
+              required
+            ></input>
+          </div>
+          <div className="div_add_article_genre">
+            <label htmlFor="title">Enter Genre</label>
+            <br />
+            <input
+              type="text"
+              onChange={handleChangeInputGenre}
+              id="genre"
+              value={genre}
+              name="genre"
+              required
+            ></input>
+          </div>
+          <div className="div_add_article_date">
+            <label htmlFor="title">Enter Release Date</label>
+            <br />
+            <input
+              type="date"
+              onChange={handleChangeInputDate}
+              id="date"
+              value={release}
+              name="date"
+              required
             ></input>
           </div>
           <div className="div_add_article_img_upload">
@@ -83,6 +126,7 @@ export default function AddArticle() {
               height="auto"
               src={photo}
               alt="uploaded_photo"
+              required
             ></img>
           </div>
           <div className="div_add_article_review_text">
@@ -93,6 +137,7 @@ export default function AddArticle() {
               name="text_review"
               value={text}
               onChange={handleChangeInputText}
+              required
             ></textarea>
           </div>
         </div>
