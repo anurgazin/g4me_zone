@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apis from "../api";
 import "./Comments.css";
-//import { ReactSession } from "react-client-session";
 
 export default function Comments() {
   let { id } = useParams();
@@ -17,26 +16,30 @@ export default function Comments() {
   }, [pre_comments, id]);
 
   const comments = Array.from(pre_comments);
-  //console.log(comments);
-  if (comments.length >= 1) {
+  if (comments.length > 0) {
     return (
       <div className="div_comments">
-        {comments.map((comment) => (
-          <div key={comment._id} className="div_comment_card">
-            <div className="div_comment_card_author">
-              <p>{comment.author} :</p>
+        <h2>Comment Section</h2>
+        <div className="div_comments_cards">
+          {comments.map((comment) => (
+            <div key={comment._id} className="div_comment_card">
+              <div className="div_comment_card_text">
+                <p>
+                  <span className="div_comment_card_author">
+                    {comment.author}:
+                  </span>{" "}
+                  <br /> {comment.text}
+                </p>
+              </div>
             </div>
-            <div className="div_comment_card_text">
-              <p>{comment.text}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   } else {
     return (
       <div className="div_comments">
-        <p>No Comments</p>
+        <p>NO COMMENTS YET, BE THE FIRST TO WRITE ONE</p>
       </div>
     );
   }

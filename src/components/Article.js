@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import apis from "../api/index";
-//import Comments from "./Comments";
 import { useParams } from "react-router-dom";
-//import { articles } from "../pseudo_data";
 import "./Article.css";
 
 export default function Article() {
   let { id } = useParams();
-  //let fid = 1;
   const [article, setArticle] = useState("");
   useEffect(() => {
     if (!article) {
@@ -22,11 +19,16 @@ export default function Article() {
   return (
     <div className="div_card">
       <div className="div_article_card">
-        <div className="div_article_card_title">
-          <h1>{article.title}</h1>
-        </div>
-        <div className="div_article_card_rating">
-          <p>&#11088;Rating: {article.rating}/5</p>
+        <div className="div_article_card_header">
+          <div className="div_article_card_title">
+            <p>{article.title}</p>
+          </div>
+          <div className="div_article_card_genre">
+            <p>Genre: {article.genre}</p>
+          </div>
+          <div className="div_article_card_rating">
+            <p>&#11088;Rating: {article.rating}/5</p>
+          </div>
         </div>
         <div className="div_article_card_img">
           <img
@@ -40,7 +42,6 @@ export default function Article() {
           <p>{article.text}</p>
         </div>
       </div>
-      {/* <Comments></Comments> */}
     </div>
   );
 }

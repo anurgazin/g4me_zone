@@ -9,7 +9,6 @@
   border: 0.1px solid white;
   display: flex;
   flex-flow: column wrap;
-  /* align-content: stretch; */
   margin-bottom: 25px;
   font-family: "Inria Sans", sans-serif;
 }

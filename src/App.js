@@ -14,21 +14,27 @@ import Comments from "./components/Comments";
 function App() {
   return (
     <main>
-      <Router>
-        <Navbar></Navbar>
-        <Routes>
-          <Route exact path="/" element={<Articles />}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/registration" element={<Register />}></Route>
-          <Route
-            exact
-            path="/article/:id"
-            element={[<Article />, <AddComment />, <Comments />]}
-          ></Route>
-          <Route exact path="/add_article" element={<AddArticle />}></Route>
-        </Routes>
-        <Footer />
-      </Router>
+      <div>
+        <Router>
+          <Navbar></Navbar>
+          <Routes>
+            <Route exact path="/" element={<Articles />}></Route>
+            <Route exact path="/login" element={<Login />}></Route>
+            <Route exact path="/registration" element={<Register />}></Route>
+            <Route
+              exact
+              path="/article/:id"
+              element={
+                <>
+                  <Article /><AddComment /><Comments />
+                </>
+              }
+            ></Route>
+            <Route exact path="/add_article" element={<AddArticle />}></Route>
+          </Routes>
+          <Footer />
+        </Router>
+      </div>
     </main>
   );
 }

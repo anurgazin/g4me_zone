@@ -2,14 +2,23 @@
   display: flex;
   flex-flow: column wrap;
   align-content: center;
+  justify-content: center;
+  font-family: "Inria Sans", sans-serif;
+  font-size: 12.5px;
+}
+.div_comments_cards{
+  border: 0.1px solid white;
 }
 .div_comment_card {
   padding: 15px 15px 15px 15px;
-  width: 745px;
-  border: 0.1px solid white;
   display: flex;
+  width: 745px;
   flex-flow: column wrap;
-  /* align-content: stretch; */
-  margin-bottom: 25px;
-  font-family: "Inria Sans", sans-serif;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.div_comment_card_author {
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
 }
