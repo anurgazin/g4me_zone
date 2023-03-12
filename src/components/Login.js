@@ -16,10 +16,12 @@ export default function Login() {
       .then((account) => {
         if (account.data.token) {
           var decoded = jwt_decode(account.data.token);
-          if (decoded.user) {
-            ReactSession.set("email", decoded.user.email);
-            ReactSession.set("isAdmin", decoded.user.isAdmin);
-            setUser(decoded.user);
+          console.log(decoded)
+          if (decoded.email) {
+            ReactSession.set("email", decoded.email);
+            ReactSession.set("isAdmin", decoded.isAdmin);
+            ReactSession.set("token", account.data.token)
+            setUser(decoded.id);
           }
           window.alert("Successfully Signed In");
         }
@@ -33,6 +35,7 @@ export default function Login() {
   const signOut = () => {
     ReactSession.set("email", "");
     ReactSession.set("isAdmin", "");
+    ReactSession.set("token", "")
     setUser();
   };
   const handleChangeInputEmail = async (event) => {

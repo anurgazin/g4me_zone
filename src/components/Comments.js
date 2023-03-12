@@ -1,21 +1,21 @@
+//updated
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apis from "../api";
 import "./Comments.css";
 
 export default function Comments() {
-  let { id } = useParams();
-  const [pre_comments, setComments] = useState("");
+  const { id } = useParams();
+  const [comments, setComments] = useState([]);
+
   useEffect(() => {
     const gettingComments = async (id) => {
-      await apis.getComments(id).then((items) => {
-        setComments(items.data.data);
-      });
+      const response = await apis.getComments(id);
+      setComments(Array.from(response.data.data));
     };
     gettingComments(id);
-  }, [pre_comments, id]);
+  }, [comments,id]);
 
-  const comments = Array.from(pre_comments);
   if (comments.length > 0) {
     return (
       <div className="div_comments">

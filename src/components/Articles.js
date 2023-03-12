@@ -4,50 +4,45 @@ import { Link } from "react-router-dom";
 import "./Articles.css";
 
 export default function Articles() {
-  const [test_articles, setTestArticles] = useState("");
-  const [loading, setLoading] = useState("");
+  const [test_articles, setTestArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [sortState, setSortState] = useState("newest");
   const [selectedGenre, setSelectedGenre] = useState("default");
-  const gettingLoad = async () => {
-    if (!test_articles) {
-      setLoading(true);
-      await gettingArticles();
-    } else {
-      setLoading(false);
-    }
-  };
-  const gettingArticles = async () => {
-    await apis.getAllArticles().then((items) => {
-      setTestArticles(items.data.data);
+
+  const gettingArticles = () => {
+    apis.getAllArticles().then((response) => {
+      setTestArticles(response.data.data);
       setLoading(false);
     });
   };
-  const handleGenreChange = async (event) => {
+
+  const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    getFilteredArticle();
-  };
-  const sortMethods = {
-    none: { method: (a, b) => null },
-    newest: { method: (a, b) => (a.release_date > b.release_date ? -1 : 1) },
-    oldest: { method: (a, b) => (a.release_date < b.release_date ? -1 : 1) },
-    descending: { method: (a, b) => (a.rating > b.rating ? -1 : 1) },
-    ascending: { method: (a, b) => (a.rating < b.rating ? -1 : 1) },
   };
 
-  const getFilteredArticle = () => {
-    if (selectedGenre === "default") {
-      return Array.from(test_articles);
-    } else {
-      return Array.from(test_articles).filter(
-        (article) => article.genre === selectedGenre
-      );
-    }
+  const sortMethods = {
+    none: { method: () => null },
+    newest: {
+      method: (a, b) => b.release_date.localeCompare(a.release_date),
+    },
+    oldest: {
+      method: (a, b) => a.release_date.localeCompare(b.release_date),
+    },
+    descending: { method: (a, b) => b.rating - a.rating },
+    ascending: { method: (a, b) => a.rating - b.rating },
   };
+
+  const articles = useMemo(() => {
+    if (selectedGenre === "default") {
+      return test_articles;
+    } else {
+      return test_articles.filter((article) => article.genre === selectedGenre);
+    }
+  }, [selectedGenre, test_articles]);
 
   useEffect(() => {
-    gettingLoad();
-  });
-  let articles = useMemo(getFilteredArticle, [selectedGenre, test_articles]);
+    gettingArticles();
+  }, []);
   if (!loading) {
     return (
       <div className="div_articles">
