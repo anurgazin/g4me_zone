@@ -4,14 +4,14 @@ import Article from "./components/Article";
 import Articles from "./components/Articles";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ReactSession } from "react-client-session";
 import "./App.css";
 import AddArticle from "./components/AddArticle";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AddComment from "./components/AddComment";
-import Comments from "./components/Comments";
 
 function App() {
+  ReactSession.setStoreType("sessionStorage");
   return (
     <main>
       <div>
@@ -26,7 +26,7 @@ function App() {
               path="/article/:id"
               element={
                 <>
-                  <Article /><AddComment /><Comments />
+                  <Article />
                 </>
               }
             ></Route>

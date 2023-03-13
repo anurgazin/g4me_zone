@@ -4,7 +4,7 @@ import { ReactSession } from "react-client-session";
 import { useParams } from "react-router-dom";
 import "./AddComment.css";
 
-export default function AddComment() {
+export default function AddComment(props) {
   //const [article, setArticle] = useState(0);
   const { id } = useParams();
   const [text, setText] = useState("");
@@ -20,9 +20,10 @@ export default function AddComment() {
         author: ReactSession.get("email"),
       })
       .then((res) => {
-        console.log(res);
+        console.log(res)
         window.alert(`Comment is added successfully`);
         setText("");
+        props.handler()
       });
   };
   if (ReactSession.get("email")) {
