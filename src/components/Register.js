@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import apis from "../api";
+import jwt_decode from "jwt-decode";
 import { ReactSession } from "react-client-session";
 import "./Register.css";
 
@@ -11,11 +12,16 @@ export default function Register() {
   const handleSignUp = async () => {
     await apis
       .createAccount({ email, password })
-      .then((result) => {
+      .then((account) => {
         window.alert("Created");
-        ReactSession.set("email", result.data.data.email);
-        ReactSession.set("isAdmin", result.data.data.isAdmin);
-        setUser(result.data.data);
+        var decoded = jwt_decode(account.data.token);
+        console.log(decoded)
+        if (decoded.id) {
+          ReactSession.set("nickname", decoded.nickname);
+          ReactSession.set("isAdmin", decoded.isAdmin);
+          ReactSession.set("token", account.data.token)
+          setUser(decoded.id);
+        }
       })
       .catch((error) => {
         console.log(error.response.status);
@@ -31,7 +37,7 @@ export default function Register() {
   const handleChangeInputPassword = async (event) => {
     setPassword(event.target.value);
   };
-  if (!user && !ReactSession.get("email")) {
+  if (!user && !ReactSession.get("nickname")) {
     return (
       <div className="div_signup_form">
         <div className="div_signup_form_inner">
@@ -51,7 +57,7 @@ export default function Register() {
             <label htmlFor="password">Enter Password</label>
             <br />
             <input
-              type="text"
+              type="password"
               onChange={handleChangeInputPassword}
               id="password"
               value={password}

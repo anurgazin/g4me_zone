@@ -1,6 +1,6 @@
 import { ReactSession } from "react-client-session";
 export default function authHeader() {
-  const user = ReactSession.get("email");
+  const user = ReactSession.get("nickname");
   const token = ReactSession.get("token");
 
   if (user && token) {

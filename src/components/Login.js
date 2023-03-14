@@ -17,8 +17,8 @@ export default function Login() {
         if (account.data.token) {
           var decoded = jwt_decode(account.data.token);
           console.log(decoded)
-          if (decoded.email) {
-            ReactSession.set("email", decoded.email);
+          if (decoded.id) {
+            ReactSession.set("nickname", decoded.nickname);
             ReactSession.set("isAdmin", decoded.isAdmin);
             ReactSession.set("token", account.data.token)
             setUser(decoded.id);
@@ -27,13 +27,18 @@ export default function Login() {
         }
       })
       .catch((error) => {
-        console.log(error);
-        window.alert("Wrong Input");
+        if(error.response.status===400){
+          window.alert("Incorrect email");
+        }else if(error.response.status===401){
+          window.alert("Check your password");
+        }else{
+          window.alert("Ooops... Something went wrong");
+        }
       });
   };
 
   const signOut = () => {
-    ReactSession.set("email", "");
+    ReactSession.set("nickname", "");
     ReactSession.set("isAdmin", "");
     ReactSession.set("token", "")
     setUser();
@@ -44,7 +49,7 @@ export default function Login() {
   const handleChangeInputPassword = async (event) => {
     setPassword(event.target.value);
   };
-  if (!user && !ReactSession.get("email")) {
+  if (!user && !ReactSession.get("nickname")) {
     return (
       <div className="div_login_form">
         <div className="div_login_form_inner">

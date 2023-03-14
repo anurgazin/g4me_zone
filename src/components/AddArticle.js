@@ -62,8 +62,7 @@ export default function AddArticle() {
       setGenre("");
     });
   };
-  if (ReactSession.get("isAdmin") && ReactSession.get("email")) {
-    console.log(ReactSession.get("email"));
+  if (ReactSession.get("isAdmin") && ReactSession.get("nickname")) {
     return (
       <div className="div_add_article">
         <div className="div_add_article_inner">

@@ -17,7 +17,6 @@ export default function AddComment(props) {
       .createComment({
         article: id,
         text: text,
-        author: ReactSession.get("email"),
       })
       .then((res) => {
         console.log(res)
@@ -26,7 +25,7 @@ export default function AddComment(props) {
         props.handler()
       });
   };
-  if (ReactSession.get("email")) {
+  if (ReactSession.get("nickname")) {
     // console.log(ReactSession.get("email"));
     return (
       <div className="div_add_comment">

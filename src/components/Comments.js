@@ -7,12 +7,12 @@ import "./Comments.css";
 
 export default function Comments() {
   const { id } = useParams();
-  const [commentState, setCommentState] = useState(false);
+  let [commentState, setCommentState] = useState(true);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const gettingComments = async (id) => {
-      if (comments.length === 0 || commentState) {
+      if (commentState) {
         const response = await apis.getComments(id);
         setComments(Array.from(response.data.data));
         setCommentState(false);
@@ -24,7 +24,6 @@ export default function Comments() {
   const handleCount = () => {
     setCommentState(true);
   };
-  console.log("comment section");
   if (comments.length > 0) {
     return (
       <>
