@@ -13,7 +13,7 @@ export default function AddArticle() {
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
   const [release, setDate] = useState(date);
-  const [genre, setGenre] = useState("");
+  const [genre, setGenre] = useState("Action");
 
   async function handleChange(event) {
     handleChangeInputPhoto(event);
@@ -26,8 +26,7 @@ export default function AddArticle() {
     console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
-  const handleChangeInputGenre = async (event) => {
-    console.log(event.target.value);
+ const handleGenreChange = (event) => {
     setGenre(event.target.value);
   };
   const handleChangeInputDate = async (event) => {
@@ -95,16 +94,17 @@ export default function AddArticle() {
             ></input>
           </div>
           <div className="div_add_article_genre">
-            <label htmlFor="title">Enter Genre</label>
-            <br />
-            <input
-              type="text"
-              onChange={handleChangeInputGenre}
-              id="genre"
-              value={genre}
-              name="genre"
-              required
-            ></input>
+            <select defaultValue={"Action"} onChange={handleGenreChange}>
+              <option value="Action">Action</option>
+              <option value="Action-RPG">Action-RPG</option>
+              <option value="Action-adventure">Action-adventure</option>
+              <option value="Fighting">Fighting</option>
+              <option value="Horror">Horror</option>
+              <option value="Metroidvania">Metroidvania</option>
+              <option value="Role-playing game">Role-playing</option>
+              <option value="Shooter">Shooter</option>
+              <option value="Survival horror">Survival Horror</option>
+            </select>
           </div>
           <div className="div_add_article_date">
             <label htmlFor="title">Enter Release Date</label>

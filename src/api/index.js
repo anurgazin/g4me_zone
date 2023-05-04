@@ -7,14 +7,15 @@ const articleApi = axios.create({
 const accountApi = axios.create({
   baseURL: process.env.REACT_APP_DEFAULT_API_URL + "account",
 });
-// const refreshTokenApi = axios.create({
-//   baseURL: process.env.REACT_APP_DEFAULT_API_URL,
-// });
 
 export const createArticle = (payload) =>
   articleApi.post(`/article`, payload, { headers: authHeader() });
 export const getAllArticles = () => articleApi.get(`/articles`);
 export const getArticleById = (id) => articleApi.get(`/article/${id}`);
+export const approveArticle = (id) =>
+  articleApi.put(`/article/approve/${id}`, "", { headers: authHeader() });
+export const deleteArticle = (id) =>
+  articleApi.delete(`/article/approve/${id}`, { headers: authHeader() });
 
 export const createComment = (payload) =>
   articleApi.post(`/comment`, payload, { headers: authHeader() });
@@ -24,7 +25,6 @@ export const createAccount = (payload) =>
   accountApi.post(`/create-account`, payload);
 export const loginAccount = (payload) => accountApi.post(`/login`, payload);
 
-// export const refreshToken = () => refreshTokenApi.post('/refresh-token')
 
 const apis = {
   createArticle,
@@ -34,6 +34,8 @@ const apis = {
   getComments,
   createAccount,
   loginAccount,
+  approveArticle,
+  deleteArticle
 };
 
 export default apis;

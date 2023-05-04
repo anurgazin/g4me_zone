@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import apis from "../api/index";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { ReactSession } from "react-client-session";
 import Comments from "./Comments";
 import "./Article.css";
 
 export default function Article() {
   let { id } = useParams();
+  const navigate = useNavigate()
   const [article, setArticle] = useState("");
   useEffect(() => {
     if (!article) {
@@ -16,6 +18,18 @@ export default function Article() {
     await apis.getArticleById(id).then((item) => {
       setArticle(item.data.data);
     });
+  };
+  const handleApprove = async () => {
+    await apis.approveArticle(id).then(()=>{
+      window.alert("Article was approved")
+      navigate('/')
+    })
+  };
+  const handleDelete = async () => {
+    await apis.deleteArticle(id).then(()=>{
+      window.alert("Article was deleted")
+      navigate('/')
+    })
   };
   return (
     <>
@@ -42,6 +56,16 @@ export default function Article() {
           </div>
           <div className="div_article_card_text">
             <p>{article.text}</p>
+          </div>
+          <div className="div_article_approvement_button">
+            {ReactSession.get("isAdmin") === true &&
+            article.approved === false ? (
+              <div>
+                <p>Approve?</p>
+                <button onClick={handleApprove}>Yes</button>
+                <button onClick={handleDelete}>No</button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

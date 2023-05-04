@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import apis from "../api/index";
+import { ReactSession } from "react-client-session";
 import { Link } from "react-router-dom";
 import "./Articles.css";
 
 export default function Articles() {
   const [test_articles, setTestArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [is_approved, setIsApproved] = useState("true");
   const [sortState, setSortState] = useState("newest");
   const [selectedGenre, setSelectedGenre] = useState("default");
 
@@ -18,6 +20,9 @@ export default function Articles() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
+  };
+  const handleApprovedChange = (event) => {
+    setIsApproved(event.target.value);
   };
 
   const sortMethods = {
@@ -33,12 +38,15 @@ export default function Articles() {
   };
 
   const articles = useMemo(() => {
-    if (selectedGenre === "default") {
-      return test_articles;
-    } else {
-      return test_articles.filter((article) => article.genre === selectedGenre);
+    if (is_approved === "false") {
+      return test_articles.filter((article) => article.approved === false);
     }
-  }, [selectedGenre, test_articles]);
+    if (selectedGenre === "default") {
+      return test_articles.filter((article) => article.approved === true);
+    } else {
+      return test_articles.filter((article) => article.genre === selectedGenre && article.approved === true);
+    }
+  }, [selectedGenre, test_articles, is_approved]);
 
   useEffect(() => {
     gettingArticles();
@@ -47,6 +55,14 @@ export default function Articles() {
     return (
       <div className="div_articles">
         <div className="div_articles_view">
+          {ReactSession.get("isAdmin") === true ? (
+            <div className="div_articles_approved">
+              <select defaultValue={"true"} onChange={handleApprovedChange}>
+                <option value="true">Approved</option>
+                <option value="false">Waiting for Approvement</option>
+              </select>
+            </div>
+          ) : null}
           <div className="div_articles_sort">
             <select
               defaultValue={"newest"}
@@ -64,12 +80,15 @@ export default function Articles() {
           <div className="div_articles_filter">
             <select defaultValue={"default"} onChange={handleGenreChange}>
               <option value="default">All Games</option>
-              <option value="Role-playing game">Role-playing</option>
               <option value="Action">Action</option>
-              <option value="Action-adventure">Action-adventure</option>
-              <option value="Survival horror">Survival Horror</option>
-              <option value="Metroidvania">Metroidvania</option>
               <option value="Action-RPG">Action-RPG</option>
+              <option value="Action-adventure">Action-adventure</option>
+              <option value="Fighting">Fighting</option>
+              <option value="Horror">Horror</option>
+              <option value="Metroidvania">Metroidvania</option>
+              <option value="Role-playing game">Role-playing</option>
+              <option value="Shooter">Shooter</option>
+              <option value="Survival horror">Survival Horror</option>
             </select>
           </div>
         </div>

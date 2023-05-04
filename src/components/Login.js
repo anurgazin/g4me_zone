@@ -98,7 +98,7 @@ export default function Login() {
     return (
       <div className="div_login_form">
         <div className="div_login_form_buttons_sign_out">
-          <h2>You are already signed in</h2>
+          <h2> {ReactSession.get('nickname')}, Welcome to the G4ME_Z0NE</h2>
           <button onClick={signOut}>Sign Out</button>
         </div>
       </div>
