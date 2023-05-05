@@ -26,7 +26,7 @@ export default function AddArticle() {
     console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
- const handleGenreChange = (event) => {
+  const handleGenreChange = (event) => {
     setGenre(event.target.value);
   };
   const handleChangeInputDate = async (event) => {
@@ -61,96 +61,102 @@ export default function AddArticle() {
       setGenre("");
     });
   };
-  if (ReactSession.get("isAdmin") && ReactSession.get("nickname")) {
-    return (
-      <div className="div_add_article">
-        <div className="div_add_article_inner">
-          <h2>Write New Article</h2>
-          <div className="div_add_article_title">
-            <label htmlFor="title">Enter Title</label>
-            <br />
-            <input
-              type="text"
-              onChange={handleChangeInputName}
-              id="title"
-              value={title}
-              name="title"
-              required
-            ></input>
+  if (ReactSession.get("id")) {
+    if (
+      ReactSession.get("role") === "Admin" ||
+      ReactSession.get("role") === "Author"
+    ) {
+      return (
+        <div className="div_add_article">
+          <div className="div_add_article_inner">
+            <h2>Write New Article</h2>
+            <div className="div_add_article_title">
+              <label htmlFor="title">Enter Title</label>
+              <br />
+              <input
+                type="text"
+                onChange={handleChangeInputName}
+                id="title"
+                value={title}
+                name="title"
+                required
+              ></input>
+            </div>
+            <div className="div_add_article_rating">
+              <label htmlFor="rating">Enter Rating</label>
+              <br />
+              <input
+                type="number"
+                step="0.1"
+                min="0"
+                max="5"
+                onChange={handleChangeInputRating}
+                value={rating}
+                id="rating"
+                name="rating"
+                required
+              ></input>
+            </div>
+            <div className="div_add_article_genre">
+              <select defaultValue={"Action"} onChange={handleGenreChange}>
+                <option value="Action">Action</option>
+                <option value="Action-RPG">Action-RPG</option>
+                <option value="Action-adventure">Action-adventure</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Horror">Horror</option>
+                <option value="Immersive Sim">Immersive Sim</option>
+                <option value="Metroidvania">Metroidvania</option>
+                <option value="Role-playing game">Role-playing</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Survival horror">Survival Horror</option>
+              </select>
+            </div>
+            <div className="div_add_article_date">
+              <label htmlFor="title">Enter Release Date</label>
+              <br />
+              <input
+                type="date"
+                onChange={handleChangeInputDate}
+                id="date"
+                value={release}
+                name="date"
+                required
+              ></input>
+            </div>
+            <div className="div_add_article_img_upload">
+              <input type="file" onChange={handleChange} />
+              <img
+                width="480px"
+                height="auto"
+                src={photo}
+                alt="uploaded_photo"
+                required
+              ></img>
+            </div>
+            <div className="div_add_article_review_text">
+              <label htmlFor="text_review">Enter your review</label> <br />
+              <textarea
+                style={{ width: "750px", height: "250px" }}
+                id="text_review"
+                name="text_review"
+                value={text}
+                onChange={handleChangeInputText}
+                required
+              ></textarea>
+            </div>
           </div>
-          <div className="div_add_article_rating">
-            <label htmlFor="rating">Enter Rating</label>
-            <br />
-            <input
-              type="number"
-              step="0.1"
-              min="0"
-              max="5"
-              onChange={handleChangeInputRating}
-              value={rating}
-              id="rating"
-              name="rating"
-              required
-            ></input>
-          </div>
-          <div className="div_add_article_genre">
-            <select defaultValue={"Action"} onChange={handleGenreChange}>
-              <option value="Action">Action</option>
-              <option value="Action-RPG">Action-RPG</option>
-              <option value="Action-adventure">Action-adventure</option>
-              <option value="Fighting">Fighting</option>
-              <option value="Horror">Horror</option>
-              <option value="Metroidvania">Metroidvania</option>
-              <option value="Role-playing game">Role-playing</option>
-              <option value="Shooter">Shooter</option>
-              <option value="Survival horror">Survival Horror</option>
-            </select>
-          </div>
-          <div className="div_add_article_date">
-            <label htmlFor="title">Enter Release Date</label>
-            <br />
-            <input
-              type="date"
-              onChange={handleChangeInputDate}
-              id="date"
-              value={release}
-              name="date"
-              required
-            ></input>
-          </div>
-          <div className="div_add_article_img_upload">
-            <input type="file" onChange={handleChange} />
-            <img
-              width="480px"
-              height="auto"
-              src={photo}
-              alt="uploaded_photo"
-              required
-            ></img>
-          </div>
-          <div className="div_add_article_review_text">
-            <label htmlFor="text_review">Enter your review</label> <br />
-            <textarea
-              style={{ width: "750px", height: "250px" }}
-              id="text_review"
-              name="text_review"
-              value={text}
-              onChange={handleChangeInputText}
-              required
-            ></textarea>
+          <div className="div_add_article_buttons">
+            <button onClick={handleInsertArticle}>ADD ARTICLE</button>
           </div>
         </div>
-        <div className="div_add_article_buttons">
-          <button onClick={handleInsertArticle}>ADD ARTICLE</button>
+      );
+    } else{
+      return (
+        <div className="div_add_article">
+          <h2>You Have no Permission to Write an Article</h2>
         </div>
-      </div>
-    );
-  } else if (ReactSession.get("email")) {
-    return (
-      <div className="div_add_article">
-        <h2>You Have no Permission to Write an Article</h2>
-      </div>
-    );
+      );
+    }
   } else {
     return (
       <div className="div_add_article">

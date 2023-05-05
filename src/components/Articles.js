@@ -85,6 +85,7 @@ export default function Articles() {
               <option value="Action-adventure">Action-adventure</option>
               <option value="Fighting">Fighting</option>
               <option value="Horror">Horror</option>
+              <option value="Immersive Sim">Immersive Sim</option>
               <option value="Metroidvania">Metroidvania</option>
               <option value="Role-playing game">Role-playing</option>
               <option value="Shooter">Shooter</option>

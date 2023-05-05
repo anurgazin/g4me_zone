@@ -24,7 +24,8 @@ export const getComments = (id) => articleApi.get(`/comments/${id}`);
 export const createAccount = (payload) =>
   accountApi.post(`/create-account`, payload);
 export const loginAccount = (payload) => accountApi.post(`/login`, payload);
-
+export const updateUsername = (payload) =>
+  accountApi.put("/username", payload, { headers: authHeader() });
 
 const apis = {
   createArticle,
@@ -35,7 +36,8 @@ const apis = {
   createAccount,
   loginAccount,
   approveArticle,
-  deleteArticle
+  deleteArticle,
+  updateUsername,
 };
 
 export default apis;

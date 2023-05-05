@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import "./AddComment.css";
 
 export default function AddComment(props) {
-  //const [article, setArticle] = useState(0);
   const { id } = useParams();
   const [text, setText] = useState("");
 
@@ -26,7 +25,6 @@ export default function AddComment(props) {
       });
   };
   if (ReactSession.get("nickname")) {
-    // console.log(ReactSession.get("email"));
     return (
       <div className="div_add_comment">
         <div className="div_add_comment_inner">

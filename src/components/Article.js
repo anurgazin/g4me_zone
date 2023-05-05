@@ -56,6 +56,7 @@ export default function Article() {
           </div>
           <div className="div_article_card_text">
             <p>{article.text}</p>
+            <p>Review Written By: {article.author}</p>
           </div>
           <div className="div_article_approvement_button">
             {ReactSession.get("isAdmin") === true &&
