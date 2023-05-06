@@ -5,52 +5,91 @@ import { Link } from "react-router-dom";
 import "./Articles.css";
 
 export default function Articles() {
-  const [test_articles, setTestArticles] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [currentArticles, setCurrentArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [is_approved, setIsApproved] = useState("true");
   const [sortState, setSortState] = useState("newest");
   const [selectedGenre, setSelectedGenre] = useState("default");
 
-  const gettingArticles = () => {
-    apis.getAllArticles().then((response) => {
-      setTestArticles(response.data.data);
-      setLoading(false);
-    });
-  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
+    setCurrentPage(1);
   };
+
   const handleApprovedChange = (event) => {
     setIsApproved(event.target.value);
+    setCurrentPage(1);
   };
 
-  const sortMethods = {
-    none: { method: () => null },
-    newest: {
-      method: (a, b) => b.release_date.localeCompare(a.release_date),
-    },
-    oldest: {
-      method: (a, b) => a.release_date.localeCompare(b.release_date),
-    },
-    descending: { method: (a, b) => b.rating - a.rating },
-    ascending: { method: (a, b) => a.rating - b.rating },
+  const handlePerPage = (event) => {
+    setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1);
   };
 
-  const articles = useMemo(() => {
+  const handleClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const filteredArticles = useMemo(() => {
     if (is_approved === "false") {
-      return test_articles.filter((article) => article.approved === false);
+      return articles.filter((article) => article.approved === false);
     }
     if (selectedGenre === "default") {
-      return test_articles.filter((article) => article.approved === true);
+      return articles.filter((article) => article.approved === true);
     } else {
-      return test_articles.filter((article) => article.genre === selectedGenre && article.approved === true);
+      return articles.filter(
+        (article) =>
+          article.genre === selectedGenre && article.approved === true
+      );
     }
-  }, [selectedGenre, test_articles, is_approved]);
+  }, [is_approved, selectedGenre, articles]);
+
+  const sortMethods = useMemo(
+    () => ({
+      none: { method: () => null },
+      newest: {
+        method: (a, b) => b.release_date.localeCompare(a.release_date),
+      },
+      oldest: {
+        method: (a, b) => a.release_date.localeCompare(b.release_date),
+      },
+      descending: { method: (a, b) => b.rating - a.rating },
+      ascending: { method: (a, b) => a.rating - b.rating },
+    }),
+    []
+  );
+
+  const sortedArticles = useMemo(() => {
+    return [...filteredArticles].sort(sortMethods[sortState].method);
+  }, [filteredArticles, sortMethods, sortState]);
+
+  const totalPages = Math.ceil(sortedArticles.length / itemsPerPage);
 
   useEffect(() => {
+    const gettingArticles = async () => {
+      try {
+        const response = await apis.getAllArticles();
+        setArticles(response.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     gettingArticles();
   }, []);
+
+  useEffect(() => {
+    setCurrentArticles(sortedArticles.slice(indexOfFirstItem, indexOfLastItem));
+  }, [sortedArticles, indexOfFirstItem, indexOfLastItem]);
+  console.log("Reloaded");
+
   if (!loading) {
     return (
       <div className="div_articles">
@@ -77,6 +116,16 @@ export default function Articles() {
               <option value="ascending">Rating &#9650;</option>
             </select>
           </div>
+          <div className="div_articles_per_page">
+            <select defaultValue={"3"} onChange={handlePerPage}>
+              <option value="none" disabled>
+                Per Page
+              </option>
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
           <div className="div_articles_filter">
             <select defaultValue={"default"} onChange={handleGenreChange}>
               <option value="default">All Games</option>
@@ -93,7 +142,7 @@ export default function Articles() {
             </select>
           </div>
         </div>
-        {articles.sort(sortMethods[sortState].method).map((article) => (
+        {currentArticles.map((article) => (
           <Link key={article._id} to={{ pathname: `/article/${article._id}` }}>
             <div className="div_article_card">
               <div className="div_article_card_header">
@@ -118,6 +167,21 @@ export default function Articles() {
             </div>
           </Link>
         ))}
+        <div className="div_articles_pagination">
+          {Array.from({
+            length: totalPages,
+          }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleClick(index + 1)}
+              className={`pagination-button ${
+                index + 1 === currentPage ? "active" : "non-active"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
     );
   } else {

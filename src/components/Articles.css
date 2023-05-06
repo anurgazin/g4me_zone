@@ -44,9 +44,25 @@
   border: 0.1px solid white;
 }
 
-.div_articles_view{
+.div_articles_view {
   display: flex;
-  flex-flow: row wrap; 
+  flex-flow: row wrap;
   /* width: 250px; */
   justify-content: space-between;
+}
+
+.div_articles_pagination {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.div_articles_pagination button{
+  font-size: 14px;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: #fff;
 }
