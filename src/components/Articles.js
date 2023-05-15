@@ -15,27 +15,32 @@ export default function Articles() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
 
+  const scrollToTop = () => {
+    const element = document.getElementById("div_articles");
+    element.scrollIntoView({ behavior: "smooth" });
+  };
+
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
     setCurrentPage(1);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   const handleApprovedChange = (event) => {
     setIsApproved(event.target.value);
     setCurrentPage(1);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   const handlePerPage = (event) => {
     setItemsPerPage(Number(event.target.value));
     setCurrentPage(1);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   const handleClick = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    scrollToTop();
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -79,13 +84,13 @@ export default function Articles() {
   const handlePrev = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      scrollToTop();
     }
   };
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      scrollToTop();
     }
   };
 
@@ -108,7 +113,7 @@ export default function Articles() {
 
   if (!loading) {
     return (
-      <div className="div_articles">
+      <div className="div_articles" id="div_articles">
         <div className="div_articles_view">
           {ReactSession.get("isAdmin") === true ? (
             <div className="div_articles_approved">

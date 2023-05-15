@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="div_footer">
       <div className="div_footer_author">
-        <span class="copyleft">&copy;</span> 2023 Copyleft: G4ME_Z0NE
+        <span className="copyleft">&copy;</span> 2023 Copyleft: G4ME_Z0NE
       </div>
       <div className="div_footer_links">
         <div className="div_footer_git">
