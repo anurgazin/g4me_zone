@@ -17,6 +17,7 @@ function App() {
       <div>
         <Router>
           <Navbar></Navbar>
+          <hr className="nav-hr" />
           <Routes>
             <Route exact path="/" element={<Articles />}></Route>
             <Route exact path="/login" element={<Login />}></Route>
@@ -32,6 +33,7 @@ function App() {
             ></Route>
             <Route exact path="/add_article" element={<AddArticle />}></Route>
           </Routes>
+          <hr className="footer-hr" />
           <Footer />
         </Router>
       </div>

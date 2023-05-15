@@ -18,20 +18,24 @@ export default function Articles() {
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
     setCurrentPage(1);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const handleApprovedChange = (event) => {
     setIsApproved(event.target.value);
     setCurrentPage(1);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const handlePerPage = (event) => {
     setItemsPerPage(Number(event.target.value));
     setCurrentPage(1);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const handleClick = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -72,6 +76,19 @@ export default function Articles() {
 
   const totalPages = Math.ceil(sortedArticles.length / itemsPerPage);
 
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const gettingArticles = async () => {
       try {
@@ -88,7 +105,6 @@ export default function Articles() {
   useEffect(() => {
     setCurrentArticles(sortedArticles.slice(indexOfFirstItem, indexOfLastItem));
   }, [sortedArticles, indexOfFirstItem, indexOfLastItem]);
-  console.log("Reloaded");
 
   if (!loading) {
     return (
@@ -168,19 +184,35 @@ export default function Articles() {
           </Link>
         ))}
         <div className="div_articles_pagination">
-          {Array.from({
-            length: totalPages,
-          }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleClick(index + 1)}
-              className={`pagination-button ${
-                index + 1 === currentPage ? "active" : "non-active"
-              }`}
-            >
-              {index + 1}
-            </button>
-          ))}
+          <button
+            onClick={handlePrev}
+            className={`prev-pagination-button`}
+            disabled={currentPage === 1}
+          >
+            &#171;
+          </button>
+          <div className="div_articles_pagination_pages">
+            {Array.from({
+              length: totalPages,
+            }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleClick(index + 1)}
+                className={`pagination-button ${
+                  index + 1 === currentPage ? "active" : "non-active"
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={handleNext}
+            className={`next-pagination-button`}
+            disabled={currentPage === totalPages}
+          >
+            &#187;
+          </button>
         </div>
       </div>
     );

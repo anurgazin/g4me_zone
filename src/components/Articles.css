@@ -55,11 +55,18 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
 }
 
-.div_articles_pagination button{
-  font-size: 14px;
+.div_articles_pagination_pages{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 2.5px;
+}
+
+.pagination-button {
+  transition: background-color .5s;
 }
 
 .pagination-button.active {
