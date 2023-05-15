@@ -16,7 +16,7 @@ export default function Articles() {
   const [itemsPerPage, setItemsPerPage] = useState(3);
 
   const scrollToTop = () => {
-    const element = document.getElementById("div_articles");
+    const element = document.getElementById("top");
     element.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -114,6 +114,7 @@ export default function Articles() {
   if (!loading) {
     return (
       <div className="div_articles" id="div_articles">
+        <div id="top" />
         <div className="div_articles_view">
           {ReactSession.get("isAdmin") === true ? (
             <div className="div_articles_approved">
