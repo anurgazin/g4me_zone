@@ -9,15 +9,15 @@ import "./App.css";
 import AddArticle from "./components/AddArticle";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import About from "./components/About";
 
 function App() {
   ReactSession.setStoreType("sessionStorage");
   return (
-    <main>
-      <div>
-        <Router>
-          <Navbar></Navbar>
-          <hr className="nav-hr" />
+    <div className="div_layout">
+      <Router>
+        <Navbar></Navbar>
+        <main>
           <Routes>
             <Route exact path="/" element={<Articles />}></Route>
             <Route exact path="/login" element={<Login />}></Route>
@@ -31,13 +31,13 @@ function App() {
                 </>
               }
             ></Route>
+            <Route exact path="/about" element={<About />}></Route>
             <Route exact path="/add_article" element={<AddArticle />}></Route>
           </Routes>
-          <hr className="footer-hr" />
-          <Footer />
-        </Router>
-      </div>
-    </main>
+        </main>
+        <Footer />
+      </Router>
+    </div>
   );
 }
 

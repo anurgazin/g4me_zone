@@ -47,7 +47,6 @@
 .div_articles_view {
   display: flex;
   flex-flow: row wrap;
-  /* width: 250px; */
   justify-content: space-between;
 }
 

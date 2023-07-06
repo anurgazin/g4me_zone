@@ -1,0 +1,26 @@
+.div_about {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  justify-content: center;
+}
+.div_about_greeting {
+  font-family: "Iceland";
+  font-size: 42px;
+  font-style: bold;
+}
+.div_about_p {
+  display: flex;
+  flex-flow: column wrap;
+  width: 775px;
+  font-family: "Inria Sans", sans-serif;
+}
+.div_about_end {
+  font-family: "Iceland";
+  font-size: 23px;
+  font-style: bold;
+}
+.div_about_contact {
+  font-family: "Inria Sans", sans-serif;
+  font-size: 15px;
+}
