@@ -83,6 +83,7 @@ export default function Login() {
               onChange={handleChangeInputEmail}
               id="email"
               value={email}
+              autoComplete="on"
               name="email"
             ></input>
           </div>
@@ -95,6 +96,7 @@ export default function Login() {
               onChange={handleChangeInputPassword}
               id="password"
               value={password}
+              autoComplete="on"
               name="password"
             ></input>
           </div>
@@ -132,6 +134,7 @@ export default function Login() {
               className="username"
               onChange={handleChangeUsername}
               value={username}
+              autoComplete="on"
             ></input>
             <button onClick={submitChanges}>Change</button>
             <br />

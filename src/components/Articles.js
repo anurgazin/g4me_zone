@@ -118,7 +118,11 @@ export default function Articles() {
         <div className="div_articles_view">
           {ReactSession.get("isAdmin") === true ? (
             <div className="div_articles_approved">
-              <select defaultValue={"true"} onChange={handleApprovedChange}>
+              <select
+                id="div_articles_approved_id"
+                defaultValue={"true"}
+                onChange={handleApprovedChange}
+              >
                 <option value="true">Approved</option>
                 <option value="false">Waiting for Approvement</option>
               </select>
@@ -126,6 +130,7 @@ export default function Articles() {
           ) : null}
           <div className="div_articles_sort">
             <select
+              id="div_articles_sort_id"
               defaultValue={"newest"}
               onChange={(e) => setSortState(e.target.value)}
             >
@@ -139,7 +144,11 @@ export default function Articles() {
             </select>
           </div>
           <div className="div_articles_per_page">
-            <select defaultValue={"3"} onChange={handlePerPage}>
+            <select
+              id="div_articles_per_page_id"
+              defaultValue={"3"}
+              onChange={handlePerPage}
+            >
               <option value="none" disabled>
                 Per Page
               </option>
@@ -149,7 +158,11 @@ export default function Articles() {
             </select>
           </div>
           <div className="div_articles_filter">
-            <select defaultValue={"default"} onChange={handleGenreChange}>
+            <select
+              id="div_articles_filter_id"
+              defaultValue={"default"}
+              onChange={handleGenreChange}
+            >
               <option value="default">All Games</option>
               <option value="Action">Action</option>
               <option value="Action-RPG">Action-RPG</option>

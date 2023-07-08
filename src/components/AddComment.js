@@ -18,7 +18,6 @@ export default function AddComment(props) {
         text: text,
       })
       .then((res) => {
-        console.log(res)
         window.alert(`Comment is added successfully`);
         setText("");
         props.handler()

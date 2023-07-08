@@ -23,14 +23,12 @@ export default function AddArticle() {
     setPhoto(URL.createObjectURL(event.target.files[0]));
   };
   const handleChangeInputImg = async (event) => {
-    console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
   const handleGenreChange = (event) => {
     setGenre(event.target.value);
   };
   const handleChangeInputDate = async (event) => {
-    console.log(event.target.value);
     setDate(event.target.value);
   };
   const handleChangeInputName = async (event) => {
@@ -98,7 +96,11 @@ export default function AddArticle() {
               ></input>
             </div>
             <div className="div_add_article_genre">
-              <select defaultValue={"Action"} onChange={handleGenreChange}>
+              <select
+                name="genre"
+                defaultValue={"Action"}
+                onChange={handleGenreChange}
+              >
                 <option value="Action">Action</option>
                 <option value="Action-RPG">Action-RPG</option>
                 <option value="Action-adventure">Action-adventure</option>
@@ -150,7 +152,7 @@ export default function AddArticle() {
           </div>
         </div>
       );
-    } else{
+    } else {
       return (
         <div className="div_add_article">
           <h2>You Have no Permission to Write an Article</h2>

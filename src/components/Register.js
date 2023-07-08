@@ -15,11 +15,11 @@ export default function Register() {
       .then((account) => {
         window.alert("Created");
         var decoded = jwt_decode(account.data.token);
-        console.log(decoded)
+        console.log(decoded);
         if (decoded.id) {
           ReactSession.set("nickname", decoded.nickname);
           ReactSession.set("isAdmin", decoded.isAdmin);
-          ReactSession.set("token", account.data.token)
+          ReactSession.set("token", account.data.token);
           setUser(decoded.id);
         }
       })
@@ -50,6 +50,7 @@ export default function Register() {
               onChange={handleChangeInputEmail}
               id="email"
               value={email}
+              autoComplete="on"
               name="email"
             ></input>
           </div>
@@ -62,6 +63,7 @@ export default function Register() {
               id="password"
               value={password}
               name="password"
+              autoComplete="on"
             ></input>
           </div>
           <div className="div_signup_form_buttons">
